@@ -1,6 +1,11 @@
+import AutoInput from "./components/AutoInput";
 
 function App() {
-   return <div></div>
+  return (
+    <div>
+      <AutoInput />
+    </div>
+  );
 }
 
 export default App;
