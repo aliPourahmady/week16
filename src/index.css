@@ -1,7 +1,5 @@
 :root {
   --glass: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.45);
-  --glass-highlight: rgba(224, 242, 247, 0.35);
 
   background:
     radial-gradient(
