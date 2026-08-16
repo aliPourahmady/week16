@@ -56,8 +56,10 @@ const Input = () => {
         )}
         {!!suggestions.length && !myData.includes(query) && (
           <div className={styles.box}>
-            {suggestions.map((suggest) => (
-              <li onClick={() => clickHandler(suggest)}>{suggest}</li>
+            {suggestions.map((suggest, index) => (
+              <li key={index} onClick={() => clickHandler(suggest)}>
+                {suggest}
+              </li>
             ))}
           </div>
         )}
