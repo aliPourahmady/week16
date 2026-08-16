@@ -1,9 +1,9 @@
-import AutoInput from "./components/AutoInput";
+import Input from "./components/Input";
 
 function App() {
   return (
     <div>
-      <AutoInput />
+      <Input />
     </div>
   );
 }
