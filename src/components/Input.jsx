@@ -1,6 +1,8 @@
 import { useState } from "react";
 import myData from "../cities.json";
 
+import styles from "./Input.module.css";
+
 const Input = () => {
   const [query, setQuery] = useState("");
   const [suggestions, setSeuggestions] = useState([]);
@@ -35,29 +37,31 @@ const Input = () => {
     }
   };
   return (
-    <div className="container">
-      <div className="input">
-        <label htmlFor="input">{hint}</label>
-        <input
-          type="text"
-          id="input"
-          value={query}
-          onChange={changeHandler}
-          onKeyDown={keyHandler}
-        />
+    <div className={styles.container}>
+      <div>
+        <div className={styles.input}>
+          <label htmlFor="input">{hint}</label>
+          <input
+            type="text"
+            id="input"
+            value={query}
+            onChange={changeHandler}
+            onKeyDown={keyHandler}
+          />
+        </div>
+        {query && !suggestions.length && !myData.includes(query) && (
+          <div className={styles.box}>
+            <p>Match Not Found</p>
+          </div>
+        )}
+        {!!suggestions.length && !myData.includes(query) && (
+          <div className={styles.box}>
+            {suggestions.map((suggest) => (
+              <li onClick={() => clickHandler(suggest)}>{suggest}</li>
+            ))}
+          </div>
+        )}
       </div>
-      {query && !suggestions.length && !myData.includes(query) && (
-        <div className="box">
-          <li>Match Not Found</li>
-        </div>
-      )}
-      {!!suggestions.length && (
-        <div className="box">
-          {suggestions.map((suggest) => (
-            <li onClick={() => clickHandler(suggest)}>{suggest}</li>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
