@@ -1,6 +1,5 @@
 import { useState } from "react";
 import myData from "../cities.json";
-import SuggestionBox from "./SuggestionBox";
 
 const Input = () => {
   const [query, setQuery] = useState("");
@@ -17,18 +16,49 @@ const Input = () => {
       setSeuggestions(suggestion);
     }
   };
+  const clickHandler = (suggest) => {
+    setQuery(suggest);
+    setHint("");
+    setSeuggestions([]);
+  };
+  const keyHandler = (e) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+
+      if (hint) {
+        setQuery(hint);
+        setHint("");
+        setSeuggestions([]);
+      }
+    } else {
+      return;
+    }
+  };
   return (
-    <>
+    <div className="container">
       <div className="input">
         <label htmlFor="input">{hint}</label>
-        <input type="text" id="input" value={query} onChange={changeHandler} />
+        <input
+          type="text"
+          id="input"
+          value={query}
+          onChange={changeHandler}
+          onKeyDown={keyHandler}
+        />
       </div>
-      <div>
-        {suggestions.map((suggest) => (
-          <SuggestionBox suggest={suggest} />
-        ))}
-      </div>
-    </>
+      {query && !suggestions.length && !myData.includes(query) && (
+        <div className="box">
+          <li>Match Not Found</li>
+        </div>
+      )}
+      {!!suggestions.length && (
+        <div className="box">
+          {suggestions.map((suggest) => (
+            <li onClick={() => clickHandler(suggest)}>{suggest}</li>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
